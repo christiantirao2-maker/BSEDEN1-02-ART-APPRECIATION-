@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pangasinan Art & Culture Gallery</title>
+<style>
+    body { font-family: Arial, sans-serif; margin: 0; background: #f4f4f4; }
+    header { background: #008080; color: white; padding: 20px; text-align: center; }
+    .gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        padding: 20px;
+    }
+    .artwork {
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        transition: 0.3s;
+    }
+    .artwork:hover { transform: scale(1.03); }
+    .artwork img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+    .info { padding: 15px; }
+    h3 { margin-top: 0; color: #008080; }
+</style>
+</head>
+<body>
+
+<header>
+  <h2> BESEDEN 1-02 Group 2</h2>
+    <h1>🌊 Pangasinan Art & Culture
+    <p> artworks inspired by Pangasinan's history, culture, and artists.</p>
+</header>
+
+<div class="gallery" id="gallery"></div>
+
+<script>
+const artworks = [
+    {
+        title: "Fernando Poe Jr. Tribute Art",
+        img: "https://upload.wikimedia.org/wikipedia/en/a/a6/Fernando_Poe_Jr.jpg",
+        desc: "This artwork honors FPJ, who became a national icon through his movies. People admire him for playing brave and kind-hearted characters. Even though he’s not from Pangasinan, his influence is strong here. Many locals grew up watching his films. It’s like he became part of everyone’s childhood."
+    },
+    {
+        title: "Victorio Edades Modernist Mural",
+        img: "https://upload.wikimedia.org/wikipedia/en/2/2e/Victorio_Edades.jpg",
+        desc: "Victorio Edades, a Dagupan-born artist, changed Philippine art forever. His style was bold and emotional. People didn’t appreciate it at first but eventually realized how creative he was. His mural reflects real struggles of ordinary people. He proved that art doesn’t have to be perfect to be meaningful."
+    },
+    {
+        title: "Carlos Bulosan Literary Portrait",
+        img: "https://upload.wikimedia.org/wikipedia/en/d/d4/Carlos_Bulosan.jpg",
+        desc: "This artwork celebrates Carlos Bulosan, a writer from Pangasinan. His stories talk about Filipino life in America. Students still read his works today. He used his talent to speak up for migrant workers. His art shows that writing can be just as powerful as paintings."
+    },
+    {
+        title: "St. John Cathedral Painting",
+        img: "https://upload.wikimedia.org/wikipedia/commons/4/4a/St_John_Cathedral_Dagupan.jpg",
+        desc: "This painting features the beautiful St. John Cathedral in Dagupan. The church is one of the province’s most iconic landmarks. People come here for worship and celebrations. Its Spanish-style design looks stunning in artwork. It’s a reminder of Pangasinan’s rich faith and history."
+    },
+    {
+        title: "Bolinao Skull Illustration",
+        img: "https://upload.wikimedia.org/wikipedia/commons/2/24/Bolinao_Skull.jpg",
+        desc: "The Bolinao Skull is famous for its ancient gold dental decorations. It proves that early Pangasinense people enjoyed creative jewelry. The artwork shows how unique their burial practices were. Historians say it reflects status and tradition. It’s amazing how even skulls can tell stories."
+    },
+    {
+        title: "Pyramid of Asia Concept Art",
+        img: "https://upload.wikimedia.org/wikipedia/commons/f/f5/Pyramid_of_Asia.jpg",
+        desc: "This artwork showcases the Pyramid of Asia in Manaoag. It’s a pyramid-shaped wellness and meditation spot. The design feels mysterious and modern at the same time. Tourists love taking pictures here. It represents the province’s mix of culture and creativity."
+    },
+    {
+        title: "F. Sionil José Legacy Portrait",
+        img: "https://upload.wikimedia.org/wikipedia/en/3/3f/F_Sionil_Jose.jpg",
+        desc: "This portrait honors F. Sionil José, one of the Philippines’ greatest authors. He was born in Rosales, Pangasinan. His books focus on society, justice, and Filipino identity. Students study his works because they’re deep and honest. His art makes Pangasinan proud on a global scale."
+    },
+    {
+        title: "Battle of Malong Monument",
+        img: "https://upload.wikimedia.org/wikipedia/commons/3/3e/Malong_Monument.jpg",
+        desc: "The artwork shows the monument of Andres Malong’s 1660 rebellion. It marks an important moment in Pangasinan’s fight for freedom. People admire Malong for his bravery. Visiting the monument feels like stepping back in time. It’s one of the strongest symbols of resistance in the province."
+    },
+    {
+        title: "Princess Urduja Artwork",
+        img: "https://upload.wikimedia.org/wikipedia/commons/b/bc/Princess_Urduja.jpg",
+        desc: "Princess Urduja is the legendary warrior princess associated with Pangasinan. She’s known for bravery and leadership. Many artists portray her as powerful and elegant. Her story inspires girls to be strong and confident. Whether myth or real, her legacy lives on."
+    },
+    {
+        title: "Mermaid of San Juan River Statue",
+        img: "https://upload.wikimedia.org/wikipedia/commons/2/28/Mermaid_statue.jpg",
+        desc: "This statue represents a local folklore about a river mermaid. People say she watches over the river. Kids love hearing the story because it feels magical. The sculpture adds charm to the area. It reminds everyone how rich Pangasinan’s myths are."
+    },
+
+    /* ADDITIONAL ARTWORKS TO COMPLETE 15 */
+
+    {
+        title: "Hundred Islands Sculpture",
+        img: "https://upload.wikimedia.org/wikipedia/commons/2/27/Hundred_Islands.jpg",
+        desc: "This sculpture shows the beauty of the Hundred Islands. It captures the waves, rocks, and tiny islets. Tourists love taking pictures beside it. The artwork feels lively and fresh. It highlights one of Pangasinan’s most iconic spots."
+    },
+    {
+        title: "Dagupan Bangus Festival Artwork",
+        img: "https://upload.wikimedia.org/wikipedia/commons/4/4d/Bangus_Statue_Dagupan.jpg",
+        desc: "This art piece celebrates the famous Bangus Festival. The colorful designs reflect the joyful vibe of Dagupan. People look forward to the parades and dances every year. The artwork shows how proud locals are of their bangus. It’s both fun and meaningful."
+    },
+    {
+        title: "Manaoag Church Devotional Art",
+        img: "https://upload.wikimedia.org/wikipedia/commons/7/72/Manaoag_Church.jpg",
+        desc: "This artwork depicts the Our Lady of Manaoag Church. People from all over the country visit it. Many believe the church brings miracles. The artwork shows its calming and sacred energy. It’s one of Pangasinan’s most treasured places."
+    },
+    {
+        title: "Lingayen Capitol Building Painting",
+        img: "https://upload.wikimedia.org/wikipedia/commons/8/82/Lingayen_Capitol_Building.jpg",
+        desc: "The Lingayen Capitol is one of the most beautiful government buildings in the Philippines. Artists love painting it because of its classic architecture. It stands as a symbol of leadership and community. The wide grounds make it perfect for events. It’s a proud landmark of Pangasinan."
+    },
+    {
+        title: "Umbrella Rocks Art (Agno)",
+        img: "https://upload.wikimedia.org/wikipedia/commons/5/59/Umbrella_Rocks_Agno.jpg",
+        desc: "This artwork features the unique umbrella-shaped rocks in Agno. The rocks look like giant mushroom caps beside the sea. Artists enjoy capturing their natural beauty. Locals consider the place peaceful and refreshing. It’s one of Pangasinan’s hidden gems."
+    }
+];
+
+const gallery = document.getElementById("gallery");
+artworks.forEach(a => {
+    const art = document.createElement("div");
+    art.className = "artwork";
+    art.innerHTML = `
+        <img src="${a.img}" alt="${a.title}">
+        <div class="info">
+            <h3>${a.title}</h3>
+            <p>${a.desc}</p>
+        </div>
+    `;
+    gallery.appendChild(art);
+});
+</script>
+
+</body>
+</html>
